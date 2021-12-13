@@ -5,10 +5,6 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-    <servlet-name>UploadServlet</servlet-name>
-    <servlet-class>ru.job4j.servlets.UploadServlet</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>UploadPhotoServlet</servlet-name>
     <servlet-class>ru.job4j.servlets.UploadPhotoServlet</servlet-class>
   </servlet>
@@ -31,10 +27,6 @@
   <servlet-mapping>
     <servlet-name>UploadPhotoServlet</servlet-name>
     <url-pattern>/uploadPhoto</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DownloadServlet</servlet-name>
