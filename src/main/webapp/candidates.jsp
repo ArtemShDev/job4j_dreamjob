@@ -46,6 +46,14 @@
                                 </a>
                                 <c:out value="${candidate.name}"/>
                             </td>
+                            <td>
+                                <img src="<c:url value='/download?name=${candidate.id}'/>" width="70px" height="70px"/>
+                            </td>
+                            <td>
+                                <a href='<c:url value="/uploadPhoto?id=${candidate.id}"/>'>
+                                    Добавить
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
