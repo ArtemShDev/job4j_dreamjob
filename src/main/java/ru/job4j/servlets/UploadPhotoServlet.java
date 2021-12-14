@@ -18,21 +18,11 @@ import java.util.Properties;
 
 public class UploadPhotoServlet extends HttpServlet {
 
-    private Properties cfg = new Properties();
-
-    {
-        try {
-            cfg.load(UploadPhotoServlet.class.getClassLoader().getResourceAsStream("dir.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         List<String> images = new ArrayList<>();
-        for (File name : new File(cfg.getProperty("dir")).listFiles()) {
+        for (File name : new File(Config.getCfg().getProperty("dir")).listFiles()) {
             images.add(name.getName());
         }
         req.setAttribute("images", images);
@@ -45,7 +35,7 @@ public class UploadPhotoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletFileUpload upload = getServletFU();
         try {
-            List<FileItem> items = upload.parseRequest(req); File folder = new File(cfg.getProperty("dir"));
+            List<FileItem> items = upload.parseRequest(req); File folder = new File(Config.getCfg().getProperty("dir"));
             if (!folder.exists()) {
                 folder.mkdir();
             }
@@ -69,5 +59,21 @@ public class UploadPhotoServlet extends HttpServlet {
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
         factory.setRepository(repository);
         return new ServletFileUpload(factory);
+    }
+
+    private static class Config {
+
+        private static final Properties CFG = new Properties();
+
+        private static Properties getCfg() {
+            if (CFG.isEmpty()) {
+                try {
+                    CFG.load(Config.class.getClassLoader().getResourceAsStream("dir.properties"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return CFG;
+        }
     }
 }
