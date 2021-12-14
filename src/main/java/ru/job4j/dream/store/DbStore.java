@@ -202,9 +202,22 @@ public class DbStore implements Store {
     }
 
     @Override
-    public boolean deleteCandidates(int id) {
+    public boolean deleteCandidate(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("DELETE FROM candidates WHERE id = ?")
+        ) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deletePost(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM post WHERE id = ?")
         ) {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
