@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.store.MemStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="ru.job4j.dream.store.DbStore" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,7 +26,7 @@
     String id = request.getParameter("id");
     Post post = new Post(0, "", "new vacancy", Calendar.getInstance());
     if (id != null) {
-        post = MemStore.instOf().findById(Integer.valueOf(id));
+        post = DbStore.instOf().findById(Integer.valueOf(id));
     }
 %>
 <div class="container pt-3">

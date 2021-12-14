@@ -55,6 +55,7 @@ public class DbStore implements Store {
         return Lazy.INST;
     }
 
+    @Override
     public Collection<Post> findAllPosts() {
         List<Post> posts = new ArrayList<>();
         try (Connection cn = pool.getConnection();
@@ -71,6 +72,7 @@ public class DbStore implements Store {
         return posts;
     }
 
+    @Override
     public Collection<Candidate> findAllCandidates() {
         List<Candidate> candidates = new ArrayList<>();
         try (Connection cn = pool.getConnection();
@@ -87,6 +89,7 @@ public class DbStore implements Store {
         return candidates;
     }
 
+    @Override
     public void save(Post post) {
         if (post.getId() == 0) {
             create(post);
@@ -125,6 +128,7 @@ public class DbStore implements Store {
         }
     }
 
+    @Override
     public Post findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM post WHERE id = ?")
@@ -141,6 +145,7 @@ public class DbStore implements Store {
         return null;
     }
 
+    @Override
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             create(candidate);
@@ -179,6 +184,7 @@ public class DbStore implements Store {
         }
     }
 
+    @Override
     public Candidate findByIdCandidate(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM candidates WHERE id = ?")
@@ -193,5 +199,18 @@ public class DbStore implements Store {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean deleteCandidates(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM candidates WHERE id = ?")
+        ) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
