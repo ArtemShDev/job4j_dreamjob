@@ -54,6 +54,11 @@
                                     Добавить
                                 </a>
                             </td>
+                            <td>
+                                <form action="<c:url value='/deleteCandidate?id=${candidate.id}'/>" method="post" enctype="multipart/form-data">
+                                    <button type="submit" class="btn btn-default">Удалить кандидата</button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

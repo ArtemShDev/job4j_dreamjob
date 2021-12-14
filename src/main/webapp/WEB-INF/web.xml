@@ -5,12 +5,16 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
+    <servlet-name>DeleteCandidateServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlets.DeleteCandidateServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>UploadPhotoServlet</servlet-name>
-    <servlet-class>ru.job4j.servlets.UploadPhotoServlet</servlet-class>
+    <servlet-class>ru.job4j.dream.servlets.UploadPhotoServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>DownloadServlet</servlet-name>
-    <servlet-class>ru.job4j.servlets.DownloadServlet</servlet-class>
+    <servlet-class>ru.job4j.dream.servlets.DownloadServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>IndexServlet</servlet-name>
@@ -24,6 +28,10 @@
     <servlet-name>CandidateServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCandidateServlet</servlet-name>
+    <url-pattern>/deleteCandidate</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UploadPhotoServlet</servlet-name>
     <url-pattern>/uploadPhoto</url-pattern>

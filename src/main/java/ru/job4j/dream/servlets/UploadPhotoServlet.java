@@ -1,9 +1,10 @@
-package ru.job4j.servlets;
+package ru.job4j.dream.servlets;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import ru.job4j.dream.Config;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -59,21 +60,5 @@ public class UploadPhotoServlet extends HttpServlet {
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
         factory.setRepository(repository);
         return new ServletFileUpload(factory);
-    }
-
-    private static class Config {
-
-        private static final Properties CFG = new Properties();
-
-        private static Properties getCfg() {
-            if (CFG.isEmpty()) {
-                try {
-                    CFG.load(Config.class.getClassLoader().getResourceAsStream("dir.properties"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return CFG;
-        }
     }
 }
