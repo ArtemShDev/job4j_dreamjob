@@ -30,6 +30,10 @@
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
+                        <label>Логин</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
                         <label>Почта</label>
                         <input type="text" class="form-control" name="email">
                     </div>
