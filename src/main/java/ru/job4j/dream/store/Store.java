@@ -27,6 +27,4 @@ public interface Store {
     User findByEmail(String email);
 
     boolean addUser(User user);
-
-    boolean checkUser(User user);
 }
