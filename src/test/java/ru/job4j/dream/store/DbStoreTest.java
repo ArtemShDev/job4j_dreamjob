@@ -1,6 +1,5 @@
 package ru.job4j.dream.store;
 
-import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
@@ -13,15 +12,9 @@ import static org.hamcrest.core.Is.is;
 
 public class DbStoreTest {
 
-    Store store;
-
-    @Before
-    public void setUp() throws Exception {
-        store = DbStore.instOf();
-    }
-
     @Test
     public void whenCreatePost() {
+        Store store = DbStore.instOf();
         Post post = new Post(0, "Java Job");
         store.save(post);
         Post postInDb = store.findById(post.getId());
@@ -30,6 +23,7 @@ public class DbStoreTest {
 
     @Test
     public void whenModifyPost() {
+        Store store = DbStore.instOf();
         Post post = new Post(0, "Java Job");
         store.save(post);
         post.setName("TEST_NAME");
@@ -40,6 +34,7 @@ public class DbStoreTest {
 
     @Test
     public void whenFindByIdPost() {
+        Store store = DbStore.instOf();
         Post post = new Post(0, "Java Job");
         store.save(post);
         Post postInDb = store.findById(post.getId());
@@ -48,6 +43,7 @@ public class DbStoreTest {
 
     @Test
     public void whenfindAllPosts() {
+        Store store = DbStore.instOf();
         for (Post post : store.findAllPosts()) {
             store.deletePost(post.getId());
         }
@@ -63,6 +59,7 @@ public class DbStoreTest {
 
     @Test
     public void whenCreateCandidate() {
+        Store store = DbStore.instOf();
         Candidate candidate = new Candidate(0, "New Candidate - Java Junior");
         store.save(candidate);
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
@@ -71,6 +68,7 @@ public class DbStoreTest {
 
     @Test
     public void whenModifyCandidate() {
+        Store store = DbStore.instOf();
         Candidate candidate = new Candidate(0, "New Candidate - Java Junior");
         store.save(candidate);
         candidate.setName("TEST_NAME_FOR_CANDIDATE");
@@ -81,6 +79,7 @@ public class DbStoreTest {
 
     @Test
     public void whenFindByIdCandidate() {
+        Store store = DbStore.instOf();
         Candidate candidate = new Candidate(0, "New Candidate - Java Junior");
         store.save(candidate);
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
@@ -89,6 +88,7 @@ public class DbStoreTest {
 
     @Test
     public void whenfindAllCandidates() {
+        Store store = DbStore.instOf();
         for (Candidate candidate : store.findAllCandidates()) {
             store.deleteCandidate(candidate.getId());
         }
