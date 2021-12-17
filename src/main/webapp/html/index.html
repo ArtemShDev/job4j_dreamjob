@@ -11,9 +11,9 @@
         function validate() {
             // var val = $('#Name').val();
             if ($('#Name').val() === '') {
-                 alert('Укажите поле ' + $('#Name').attr('id'));
-                 return false;
-             }
+                alert('Укажите поле ' + $('#Name').attr('id'));
+                return false;
+            }
             if ($('#Surname').val() === '') {
                 alert('Укажите поле ' + $('#Surname').attr('id'));
                 return false;
@@ -22,6 +22,20 @@
                 alert('Укажите поле ' + $('#Description').attr('id'));
                 return false;
             }
+        }
+
+        function addRow() {
+            //получаем ссылку на последний элемент в таблице.
+            //и после него добавляем html
+            $('#tableApp tr:last').after('<tr>' +
+                '<th scope="row" data=' + (1 + Number($('#tableApp tr:last').find('th').attr('data'))) + '>'
+                + (1 + Number($('#tableApp tr:last').find('th').attr('data')))
+                + '</th>'
+                + '<td>' + $('#Name').val() + '</td>'
+                + '<td>' + $('#Surname').val() + '</td>'
+                + '<td>' + $('#Sex').val() + '</td>'
+                + '<td>' + $('#Description').val() + '</td>'
+                + '</tr>');
         }
     </script>
 </head>
@@ -58,12 +72,13 @@
             <input class="form-control" id="Description" type="text" placeholder="not necessary">
         </div>
         <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+        <button type="button" class="btn btn-default" onclick="return addRow();">Add row</button>
     </form>
     <br/>
-    <table class="table table-bordered table-dark">
+    <table class="table table-bordered table-dark" id="tableApp">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" id="countTable">#</th>
             <th scope="col">Name</th>
             <th scope="col">Surname</th>
             <th scope="col">Sex</th>
@@ -72,21 +87,21 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row">1</th>
+            <th scope="row" data=1>1</th>
             <td>Art</td>
             <td>Sh</td>
             <th scope="col">Male</th>
             <td>Junior</td>
         </tr>
         <tr>
-            <th scope="row">2</th>
+            <th scope="row" data=2>2</th>
             <td>Olga</td>
             <td>Sh</td>
             <th scope="col">Female</th>
             <td>CDO</td>
         </tr>
         <tr>
-            <th scope="row">3</th>
+            <th scope="row" data=3>3</th>
             <td>Poly</td>
             <td>Sh</td>
             <th scope="col">Female</th>
