@@ -22,9 +22,15 @@
                 alert('Укажите поле ' + $('#Description').attr('id'));
                 return false;
             }
+            return true;
         }
 
         function addRow() {
+            var checked = document.getElementById('male').checked;
+            var sex = document.getElementById('male').value;
+            if (!checked) {
+                sex = document.getElementById('female').value;
+            }
             //получаем ссылку на последний элемент в таблице.
             //и после него добавляем html
             $('#tableApp tr:last').after('<tr>' +
@@ -33,7 +39,7 @@
                 + '</th>'
                 + '<td>' + $('#Name').val() + '</td>'
                 + '<td>' + $('#Surname').val() + '</td>'
-                + '<td>' + $('#Sex').val() + '</td>'
+                + '<td>' + sex + '</td>'
                 + '<td>' + $('#Description').val() + '</td>'
                 + '</tr>');
         }
@@ -56,13 +62,13 @@
         </div>
         <label for="male">Sex:</label>
         <div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="sex" id="male" value="option1" checked>
+            <div class="form-check" id="radios">
+                <input class="form-check-input" type="radio" name="sex" id="male" value="male" checked>
                 <label class="form-check-label" for="male">
                     Male
                 </label>
-                <input class="form-check-input" type="radio" name="sex" id="Female" value="option1">
-                <label class="form-check-label" for="Female">
+                <input class="form-check-input" type="radio" name="sex" id="female" value="female">
+                <label class="form-check-label" for="female">
                     Female
                 </label>
             </div>
