@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            // var val = $('#Name').val();
+            if ($('#Name').val() === '') {
+                 alert('Укажите поле ' + $('#Name').attr('id'));
+                 return false;
+             }
+            if ($('#Surname').val() === '') {
+                alert('Укажите поле ' + $('#Surname').attr('id'));
+                return false;
+            }
+            if ($('#Description').val() === '') {
+                alert('Укажите поле ' + $('#Description').attr('id'));
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -15,14 +32,13 @@
     <p>Application form</p>
     <form>
         <div class="form-group">
-            <label for="userName">Name</label>
-            <input type="text" class="form-control" id="userName" aria-describedby="userNameHelp">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control" id="Name" aria-describedby="userNameHelp">
             <small id="userNameHelp" class="form-text text-muted">Please, don't enter '*'</small>
         </div>
         <div class="form-group">
-            <label for="surname">Surname</label>
-            <!--            <input type="password" class="form-control" id="surname">-->
-            <input class="form-control" id="surname" type="text" placeholder="not necessary">
+            <label for="Surname">Surname</label>
+            <input class="form-control" id="Surname" type="text" placeholder="not necessary">
         </div>
         <label for="male">Sex:</label>
         <div>
@@ -38,10 +54,12 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="description">Description</label>
-            <input class="form-control" id="description" type="text" placeholder="not necessary">
+            <label for="Description">Description</label>
+            <input class="form-control" id="Description" type="text" placeholder="not necessary">
         </div>
+        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
     </form>
+    <br/>
     <table class="table table-bordered table-dark">
         <thead>
         <tr>
