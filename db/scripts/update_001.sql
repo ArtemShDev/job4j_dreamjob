@@ -4,16 +4,16 @@ CREATE TABLE if not exists post (
                       created date
 );
 
+CREATE TABLE if not exists cities (
+                                      id SERIAL PRIMARY KEY,
+                                      name varchar(100)
+    );
+
 CREATE TABLE if not exists candidates (
                             id SERIAL PRIMARY KEY,
                             name varchar(200),
                             created date,
                             city_id SERIAL REFERENCES cities(id)
-);
-
-CREATE TABLE if not exists cities (
-                            id SERIAL PRIMARY KEY,
-                            name varchar(100)
 );
 
 -- INSERT into cities(name) values('Moscow');
