@@ -18,10 +18,42 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <title>Работа мечты</title>
+
+    <script>
+        function validate() {
+            if ($('#Email').val() === '') {
+                alert('Укажите поле ' + $('#Email').attr('id'));
+                return false;
+            }
+            if ($('#Password').val() === '') {
+                alert('Укажите поле ' + $('#Password').attr('id'));
+                return false;
+            }
+            return true;
+        }
+
+        // function addRow() {
+        //     var checked = document.getElementById('male').checked;
+        //     var sex = document.getElementById('male').value;
+        //     if (!checked) {
+        //         sex = document.getElementById('female').value;
+        //     }
+        //     //получаем ссылку на последний элемент в таблице.
+        //     //и после него добавляем html
+        //     $('#tableApp tr:last').after('<tr>' +
+        //         '<th scope="row" data=' + (1 + Number($('#tableApp tr:last').find('th').attr('data'))) + '>'
+        //         + (1 + Number($('#tableApp tr:last').find('th').attr('data')))
+        //         + '</th>'
+        //         + '<td>' + $('#Name').val() + '</td>'
+        //         + '<td>' + $('#Surname').val() + '</td>'
+        //         + '<td>' + sex + '</td>'
+        //         + '<td>' + $('#Description').val() + '</td>'
+        //         + '</tr>');
+        // }
+    </script>
 </head>
 <body>
 <div class="container pt-3">
-
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
@@ -31,13 +63,13 @@
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email" id="Email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" name="password" id="Password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validate();">Войти</button>
                     <c:if test="${not empty error}">
                         <div style="color:red; font-weight: bold; margin: 30px 0;">
                             <c:out value="${error}"/>

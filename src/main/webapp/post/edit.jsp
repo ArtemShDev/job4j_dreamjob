@@ -24,6 +24,15 @@
             crossorigin="anonymous"></script>
 
     <title>Работа мечты</title>
+    <script>
+        function validate() {
+            if ($('#Name').val() === '') {
+                alert('Укажите поле ' + $('#userName').attr('name'));
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 <%
@@ -61,9 +70,9 @@
                 desc=<%=post.getDescription()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%=post.getName()%>">
+                        <input type="text" class="form-control" name="name" id="Name" value="<%=post.getName()%>">
                     </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validate();">Сохранить</button>
                 </form>
             </div>
         </div>

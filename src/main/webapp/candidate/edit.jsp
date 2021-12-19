@@ -1,9 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="ru.job4j.dream.store.DbStore" %>
+<%@ page import="ru.job4j.dream.model.City" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
+<%
+    String id = request.getParameter("id");
+    Candidate candidate = new Candidate(0, "");
+    if (id != null) {
+        candidate = DbStore.instOf().findByIdCandidate(Integer.valueOf(id));
+    }
+%>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -23,15 +31,40 @@
             crossorigin="anonymous"></script>
 
     <title>Данные кандидата</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        function validate() {
+            if ($('#FIO').val() === '') {
+                alert('Укажите поле ' + $('#FIO').attr('id'));
+                return false;
+            }
+            var frm = document.getElementById("form_candidate");
+            frm.action = frm.action + "&city_id=" + document.getElementById('towns').value;
+            return true;
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8080/job4j_dreamjob/cities',
+                dataType: 'json'
+            }).done(function (data) {
+                for (var city of data) {
+                    var isDefaultSelected = false;
+                    var str = <%=String.valueOf(candidate.getCityId())%>;
+                    if (city.id === str) {
+                        isDefaultSelected = true;
+                    }
+                    $('#towns').append(new Option(city.name, city.id, isDefaultSelected, isDefaultSelected));
+                }
+            }).fail(function (err) {
+                console.log(err);
+            });
+        });
+    </script>
 </head>
 <body>
-<%
-    String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "");
-    if (id != null) {
-        candidate = DbStore.instOf().findByIdCandidate(Integer.valueOf(id));
-    }
-%>
 <div class="container pt-3">
     <div class="row">
         <ul class="nav">
@@ -56,12 +89,19 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
+                <form id="form_candidate"
+                      action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
                     <div class="form-group">
                         <label>ФИО</label>
-                        <input type="text" class="form-control" name="fio" value="<%=candidate.getName()%>">
+                        <input type="text" class="form-control" name="fio" id="FIO" value="<%=candidate.getName()%>">
                     </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <div class="form-group">
+                        <label>Город</label><br/>
+                        <select name="town" id="towns">
+                            <option></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="return validate();">Сохранить</button>
                 </form>
             </div>
         </div>
