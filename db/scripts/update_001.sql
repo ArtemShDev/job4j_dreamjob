@@ -16,7 +16,7 @@ CREATE TABLE if not exists candidates (
                             city_id SERIAL REFERENCES cities(id)
 );
 
--- INSERT into cities(name) values('Moscow');
--- INSERT into cities(name) values('Spb');
--- INSERT into cities(name) values('Rostov');
--- INSERT into cities(name) values('Torzhok');
+INSERT into cities(name) values('Moscow');
+INSERT into cities(name) values('Spb');
+INSERT into cities(name) values('Rostov');
+INSERT into cities(name) values('Torzhok');

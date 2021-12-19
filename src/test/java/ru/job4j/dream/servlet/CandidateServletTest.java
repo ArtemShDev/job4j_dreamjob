@@ -22,6 +22,7 @@ public class CandidateServletTest {
         HttpServletResponse resp = mock(HttpServletResponse.class);
         when(req.getParameter("id")).thenReturn("0");
         when(req.getParameter("fio")).thenReturn("Test user");
+        when(req.getParameter("town")).thenReturn("1");
         new CandidateServlet().doPost(req, resp);
         Candidate candidate = DbStore.instOf().findByIdCandidate(0);
         assertThat(candidate, nullValue());

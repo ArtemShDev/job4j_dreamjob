@@ -19,6 +19,7 @@ public class Candidate {
     public Candidate(int id, String name) {
         this.id = id;
         this.name = name;
+        this.cityId = 1;
     }
 
     public Candidate(int id, String name, int cityId) {
