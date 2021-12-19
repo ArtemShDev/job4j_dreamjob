@@ -2,29 +2,17 @@ package ru.job4j.dream.model;
 
 import java.util.Objects;
 
-public class Candidate {
+public class City {
 
     private int id;
     private String name;
-    private int cityId;
 
-    public int getCityId() {
-        return cityId;
+    public City() {
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
-
-    public Candidate(int id, String name) {
+    public City(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Candidate(int id, String name, int cityId) {
-        this.id = id;
-        this.name = name;
-        this.cityId = cityId;
     }
 
     public int getId() {
@@ -51,13 +39,12 @@ public class Candidate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Candidate candidate = (Candidate) o;
-        return id == candidate.id
-                && Objects.equals(name, candidate.name);
+        City city = (City) o;
+        return name.equals(city.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name);
     }
 }
