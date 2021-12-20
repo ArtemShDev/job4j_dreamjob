@@ -34,4 +34,8 @@ public interface Store {
     List<City> getAllCities();
 
     void save(City city);
+
+    Collection<Post> findAllPostsForToday();
+
+    Collection<Candidate> findAllCandidatesForToday();
 }

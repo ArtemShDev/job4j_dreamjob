@@ -59,7 +59,25 @@ public class DbStore implements Store {
         List<Post> posts = new ArrayList<>();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
-                     cn.prepareStatement("SELECT * FROM post where created between current_date and current_date")
+                     cn.prepareStatement("SELECT * FROM post")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    posts.add(new Post(it.getInt("id"), it.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    @Override
+    public Collection<Post> findAllPostsForToday() {
+        List<Post> posts = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =
+                     cn.prepareStatement("SELECT * FROM post where created between current_date - 1 and current_date")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -77,8 +95,27 @@ public class DbStore implements Store {
         List<Candidate> candidates = new ArrayList<>();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
+                     cn.prepareStatement("SELECT * FROM candidates")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name"),
+                            Integer.parseInt(it.getString("city_id"))));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return candidates;
+    }
+
+    @Override
+    public Collection<Candidate> findAllCandidatesForToday() {
+        List<Candidate> candidates = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =
                      cn.prepareStatement("SELECT * FROM candidates where created "
-                             + "between current_date and current_date")
+                             + "between current_date - 1 and current_date")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
