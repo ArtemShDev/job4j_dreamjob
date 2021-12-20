@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <label>Город</label><br/>
-                        <select name="town" id="towns">
+                        <select name="town" id="towns" style="min-width:100%;">
                             <option></option>
                         </select>
                     </div>
